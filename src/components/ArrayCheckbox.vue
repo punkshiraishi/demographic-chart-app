@@ -26,6 +26,14 @@ const props = defineProps({
     type: String,
     required: true,
   },
+
+  /**
+   * 非活性化どうか
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['update:modelValue', 'check', 'uncheck'])
@@ -58,6 +66,7 @@ function onInput(event: Event) {
     <input
       v-model="checked"
       type="checkbox"
+      :disabled="disabled"
       @input="onInput"
     >
     <span>
