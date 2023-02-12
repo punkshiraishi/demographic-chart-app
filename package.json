@@ -13,7 +13,9 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "vue": "^3.2.45"
+    "chart.js": "^4.2.1",
+    "vue": "^3.2.45",
+    "vue-chartjs": "^5.2.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
