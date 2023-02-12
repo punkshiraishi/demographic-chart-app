@@ -7,7 +7,7 @@ class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed_path = urlparse(self.path)
-        url = 'https://opendata.resas-portal.go.jp/api/v1/population/nature' + '?' + parsed_path.query
+        url = 'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear' + '?' + parsed_path.query
         print(parsed_path)
         print(url)
 
