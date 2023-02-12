@@ -1,0 +1,56 @@
+{
+  "Component": {
+    "scope": "vue",
+    "prefix": [
+      "component",
+    ],
+    "description": "新規コンポーネント作成",
+    "body": [
+      "<script lang=\"ts\" setup>",
+      "import { toRefs } from 'vue'",
+      "",
+      "const props = defineProps({",
+      "  name: {",
+      "    type: String,",
+      "    required: true,",
+      "  },",
+      "})",
+      "",
+      "const { name } = toRefs(props)",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "  </div>",
+      "</template>",
+      "",
+    ],
+  },
+  "Story": {
+    "scope": "typescript",
+    "prefix": [
+      "story",
+    ],
+    "description": "新規ストーリー作成",
+    "body": [
+      "import { defineComponent } from 'vue'",
+      "",
+      "import ${TM_FILENAME/(.stories.ts)//} from './${TM_FILENAME/(.stories.ts)//}.vue'",
+      "",
+      "export default {",
+      "  title: 'components/${TM_FILENAME/(.stories.ts)//}',",
+      "  component: ${TM_FILENAME/(.stories.ts)//},",
+      "}",
+      "",
+      "export const basic = () => defineComponent({",
+      "  components: {",
+      "    ${TM_FILENAME/(.stories.ts)//},",
+      "  },",
+      "  template: `",
+      "    <${TM_FILENAME/(.stories.ts)//} />",
+      "  `,",
+      "})",
+      "",
+    ]
+  }
+}
