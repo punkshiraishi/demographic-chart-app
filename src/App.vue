@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
 
 const prefectures = ref<any>()
 const nature = ref<any>()
@@ -12,7 +11,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <HelloWorld msg="hello" />
   {{ prefectures }}
   {{ nature }}
 </template>
