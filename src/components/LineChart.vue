@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { type PropType, computed, toRefs } from 'vue'
 import { Line } from 'vue-chartjs'
-import type { ChartOptions } from 'chart.js'
+import { type ChartOptions, Colors } from 'chart.js'
 import { CategoryScale, Chart as ChartJS, Legend, LineElement, LinearScale, PointElement, Title, Tooltip } from 'chart.js'
 
 const props = defineProps({
@@ -23,7 +23,7 @@ const props = defineProps({
   },
 })
 
-ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
+ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, Colors)
 
 const { labels, datasets } = toRefs(props)
 
@@ -31,6 +31,9 @@ const chartOptions: ChartOptions<'line'> = {
   plugins: {
     legend: {
       display: false,
+    },
+    colors: {
+      forceOverride: true,
     },
   },
 }
