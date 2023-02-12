@@ -30,7 +30,9 @@ const { labels, datasets } = toRefs(props)
 const chartOptions: ChartOptions<'line'> = {
   plugins: {
     legend: {
-      display: false,
+
+      // 凡例を click したときにその系列が消える挙動を無効にする
+      onClick: () => {},
     },
     colors: {
       forceOverride: true,
