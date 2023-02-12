@@ -44,17 +44,33 @@ const datasets = computed(() => populationDataState.value
 </script>
 
 <template>
-  <ArrayCheckbox
-    v-for="prefecture in prefectures"
-    :key="prefecture.prefCode"
-    v-model="selectedPrefectureCode"
-    :item="prefecture.prefCode"
-    :label="prefecture.prefName"
-    :disabled="loading"
-    @check="onCheck(prefecture)"
-  />
-  <LineChart
-    :labels="years"
-    :datasets="datasets"
-  />
+  <div
+    class="
+      p-5 h-screen md:h-auto
+      flex flex-col md:flex-row justify-center items-center gap-3
+    "
+  >
+    <div class="w-full h-[300px] md:w-1/2 md:h-[500px]">
+      <LineChart
+        :labels="years"
+        :datasets="datasets"
+      />
+    </div>
+    <div
+      class="
+        overflow-auto w-full
+        grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-2
+      "
+    >
+      <ArrayCheckbox
+        v-for="prefecture in prefectures"
+        :key="prefecture.prefCode"
+        v-model="selectedPrefectureCode"
+        :item="prefecture.prefCode"
+        :label="prefecture.prefName"
+        :disabled="loading"
+        @check="onCheck(prefecture)"
+      />
+    </div>
+  </div>
 </template>
