@@ -6,7 +6,7 @@ export function useApi() {
     return (await (await fetch('/api/prefectures')).json() as PrefecturesResponse).result
   }
 
-  async function getPoplation(prefCode: number) {
+  async function getPopulation(prefCode: number) {
     return (await (await fetch(
       `/api/population/composition/perYear?cityCode=-&prefCode=${prefCode}`,
     )).json() as PopulationDataResponse)
@@ -15,6 +15,6 @@ export function useApi() {
 
   return {
     getPrefectures,
-    getPoplation,
+    getPopulation,
   }
 }

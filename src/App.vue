@@ -7,11 +7,11 @@ import { useApi } from './hooks/useApi'
 import type { Prefecture } from './types/prefecture'
 import { usePopulationDataStore } from './hooks/usePopulationDataStore'
 
-const { getPrefectures, getPoplation } = useApi()
+const { getPrefectures, getPopulation } = useApi()
 const loading = ref(false)
 const prefectures = ref<Prefecture[]>([])
 const selectedPrefectureCode = ref<number[]>([])
-const { populationDataState, updatePopulationDataState } = usePopulationDataStore(getPoplation)
+const { populationDataState, updatePopulationDataState } = usePopulationDataStore(getPopulation)
 
 onMounted(async () => {
   prefectures.value = await getPrefectures()
