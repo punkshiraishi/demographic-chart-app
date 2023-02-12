@@ -1,5 +1,5 @@
 import { readonly, ref } from 'vue'
-import type { PopulationData } from '@/types/populationNature'
+import type { PopulationData } from '@/types/population'
 import type { Prefecture } from '@/types/prefecture'
 
 export function usePopulationDataStore(getPoplationNature: (prefCode: number) => Promise<PopulationData>) {

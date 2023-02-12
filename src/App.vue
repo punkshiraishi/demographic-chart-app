@@ -7,11 +7,11 @@ import { useApi } from './hooks/useApi'
 import type { Prefecture } from './types/prefecture'
 import { usePopulationDataStore } from './hooks/usePopulationDataStore'
 
-const { getPrefectures, getPoplationNature } = useApi()
+const { getPrefectures, getPoplation } = useApi()
 const loading = ref(false)
 const prefectures = ref<Prefecture[]>([])
 const selectedPrefectureCode = ref<number[]>([])
-const { populationDataState, updatePopulationDataState } = usePopulationDataStore(getPoplationNature)
+const { populationDataState, updatePopulationDataState } = usePopulationDataStore(getPoplation)
 
 onMounted(async () => {
   prefectures.value = await getPrefectures()
@@ -38,10 +38,7 @@ const datasets = computed(() => populationDataState.value
   // API から受け取ったデータ型を LineChart が要求する型に変換する
   .map(population => ({
     name: population.prefecture.prefName,
-    data: population.data.bar
-
-      // 男女でデータが分かれているので合計する
-      .mandata.map((man, index) => man.value + population.data.bar.womandata[index].value),
+    data: population.data.map(item => item.value),
   })))
 </script>
 
