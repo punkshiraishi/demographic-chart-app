@@ -28,7 +28,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'check', 'uncheck'])
 
 const checked = computed({
   get() {
@@ -40,6 +40,17 @@ const checked = computed({
       : props.modelValue.filter(item => item !== props.item))
   },
 })
+
+function onInput(event: Event) {
+  if (!(event.target instanceof HTMLInputElement))
+    return
+
+  if (event.target.value)
+    emit('check')
+
+  else
+    emit('uncheck')
+}
 </script>
 
 <template>
@@ -47,6 +58,7 @@ const checked = computed({
     <input
       v-model="checked"
       type="checkbox"
+      @input="onInput"
     >
     <span>
       {{ label }}
