@@ -8,6 +8,8 @@ import { useApi } from './hooks/useApi'
 import type { Prefecture } from './types/prefecture'
 import { usePopulationDataStore } from './hooks/usePopulationDataStore'
 
+const loading = ref(false)
+
 const prefectures = ref<Prefecture[]>([])
 const selectedPrefectureCode = ref<number[]>([])
 
@@ -20,7 +22,14 @@ onMounted(async () => {
 const { populationDataState, updatePopulationDataState } = usePopulationDataStore(getPoplationNature)
 
 async function onCheck(prefecture: Prefecture) {
-  await updatePopulationDataState(prefecture)
+  try {
+    loading.value = true
+    await updatePopulationDataState(prefecture)
+  }
+
+  finally {
+    loading.value = false
+  }
 }
 
 const years = range(1985, 2021, 5)
@@ -41,6 +50,7 @@ const datasets = computed(() => populationDataState.value
     v-model="selectedPrefectureCode"
     :item="prefecture.prefCode"
     :label="prefecture.prefName"
+    :disabled="loading"
     @check="onCheck(prefecture)"
   />
   <LineChart
