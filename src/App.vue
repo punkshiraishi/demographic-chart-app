@@ -45,7 +45,7 @@ const datasets = computed(() => fechedPopulationNatures.value
     v-for="prefecture in prefectures"
     :key="prefecture.prefCode"
     v-model="selectedPrefectureCode"
-    :item="prefecture"
+    :item="prefecture.prefCode"
     :label="prefecture.prefName"
     @check="onCheck(prefecture)"
   />
