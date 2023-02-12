@@ -45,7 +45,7 @@ function onInput(event: Event) {
   if (!(event.target instanceof HTMLInputElement))
     return
 
-  if (event.target.value)
+  if (event.target.checked)
     emit('check')
 
   else
