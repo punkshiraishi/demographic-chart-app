@@ -5,8 +5,8 @@ import ArrayCheckbox from './components/ArrayCheckbox.vue'
 import LineChart from './components/LineChart.vue'
 import { useApi } from './hooks/useApi'
 
-import type { PopulationNature } from './types/populationNature'
 import type { Prefecture } from './types/prefecture'
+import { usePopulationDataStore } from './hooks/usePopulationDataStore'
 
 const prefectures = ref<Prefecture[]>([])
 const selectedPrefectureCode = ref<number[]>([])
@@ -17,28 +17,15 @@ onMounted(async () => {
   prefectures.value = await getPrefectures()
 })
 
-const fechedPopulationNatures = ref<{
-  prefecture: Prefecture
-  data: PopulationNature
-}[]>([])
-
-async function mutatePopulationNatureStore(prefecture: Prefecture) {
-  if (fechedPopulationNatures.value.find(population => population.prefecture.prefCode === prefecture.prefCode))
-    return
-
-  fechedPopulationNatures.value.push({
-    prefecture,
-    data: await getPoplationNature(prefecture.prefCode),
-  })
-}
+const { populationDataState, updatePopulationDataState } = usePopulationDataStore(getPoplationNature)
 
 async function onCheck(prefecture: Prefecture) {
-  await mutatePopulationNatureStore(prefecture)
+  await updatePopulationDataState(prefecture)
 }
 
 const years = range(1985, 2021, 5)
 
-const datasets = computed(() => fechedPopulationNatures.value
+const datasets = computed(() => populationDataState.value
   .filter(population => selectedPrefectureCode.value.includes(population.prefecture.prefCode))
   .map(population => ({
     name: population.prefecture.prefName,
