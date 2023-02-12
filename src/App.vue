@@ -28,7 +28,8 @@ async function onCheck(prefecture: Prefecture) {
   }
 }
 
-const years = range(1985, 2021, 5)
+// TODO: API から取得した値で動的にラベルを表示できるとより良い
+const years = range(1960, 2046, 5)
 
 const datasets = computed(() => populationDataState.value
 
