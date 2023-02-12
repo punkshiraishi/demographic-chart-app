@@ -4,22 +4,18 @@ import { range } from 'lodash'
 import ArrayCheckbox from './components/ArrayCheckbox.vue'
 import LineChart from './components/LineChart.vue'
 import { useApi } from './hooks/useApi'
-
 import type { Prefecture } from './types/prefecture'
 import { usePopulationDataStore } from './hooks/usePopulationDataStore'
 
+const { getPrefectures, getPoplationNature } = useApi()
 const loading = ref(false)
-
 const prefectures = ref<Prefecture[]>([])
 const selectedPrefectureCode = ref<number[]>([])
-
-const { getPrefectures, getPoplationNature } = useApi()
+const { populationDataState, updatePopulationDataState } = usePopulationDataStore(getPoplationNature)
 
 onMounted(async () => {
   prefectures.value = await getPrefectures()
 })
-
-const { populationDataState, updatePopulationDataState } = usePopulationDataStore(getPoplationNature)
 
 async function onCheck(prefecture: Prefecture) {
   try {
@@ -35,11 +31,17 @@ async function onCheck(prefecture: Prefecture) {
 const years = range(1985, 2021, 5)
 
 const datasets = computed(() => populationDataState.value
+
+  // 表示するデータセットは選択中の都道府県に限定する
   .filter(population => selectedPrefectureCode.value.includes(population.prefecture.prefCode))
+
+  // API から受け取ったデータ型を LineChart が要求する型に変換する
   .map(population => ({
     name: population.prefecture.prefName,
-    data: population.data.bar.mandata
-      .map((man, index) => man.value + population.data.bar.womandata[index].value),
+    data: population.data.bar
+
+      // 男女でデータが分かれているので合計する
+      .mandata.map((man, index) => man.value + population.data.bar.womandata[index].value),
   })))
 </script>
 
