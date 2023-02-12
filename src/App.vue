@@ -1,21 +1,24 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import ArrayCheckbox from './components/ArrayCheckbox.vue'
-import type { PopulationNature, PopulationNatureResponse } from './types/populationNature'
-import type { Prefecture, PrefecturesResponse } from './types/prefecture'
+import { useApi } from './hooks/useApi'
+import type { PopulationNature } from './types/populationNature'
+import type { Prefecture } from './types/prefecture'
 
 const prefectures = ref<Prefecture[]>([])
 const selectedPrefectures = ref<Prefecture[]>([])
 
+const { getPrefectures, getPoplationNature } = useApi()
+
 onMounted(async () => {
-  prefectures.value = (await (await fetch('/api/prefectures')).json() as PrefecturesResponse).result
+  prefectures.value = await getPrefectures()
 })
 
 const fechedPopulationNature = ref<PopulationNature[]>([])
 
 async function onCheck(prefecture: Prefecture) {
   fechedPopulationNature.value.push(
-    (await (await fetch(`/api/population/nature?ageTo=-&ageFrom=-&cityCode=-&prefCode=${prefecture.prefCode}`)).json() as PopulationNatureResponse).result,
+    await getPoplationNature(prefecture.prefCode),
   )
 }
 </script>
