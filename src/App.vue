@@ -32,7 +32,7 @@ async function onCheck(prefecture: Prefecture) {
 const years = range(1985, 2021, 5)
 
 const datasets = computed(() => fechedPopulationNatures.value
-  .filter(population => !selectedPrefectureCode.value.includes(population.prefecture.prefCode))
+  .filter(population => selectedPrefectureCode.value.includes(population.prefecture.prefCode))
   .map(population => ({
     name: population.prefecture.prefName,
     data: population.data.bar.mandata
