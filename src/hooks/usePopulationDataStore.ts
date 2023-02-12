@@ -1,11 +1,11 @@
 import { readonly, ref } from 'vue'
-import type { PopulationNature } from '@/types/populationNature'
+import type { PopulationData } from '@/types/populationNature'
 import type { Prefecture } from '@/types/prefecture'
 
-export function usePopulationDataStore(getPoplationNature: (prefCode: number) => Promise<PopulationNature>) {
+export function usePopulationDataStore(getPoplationNature: (prefCode: number) => Promise<PopulationData>) {
   const populationDataState = ref<{
     prefecture: Prefecture
-    data: PopulationNature
+    data: PopulationData
   }[]>([])
 
   async function updatePopulationDataState(prefecture: Prefecture) {

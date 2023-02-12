@@ -1,4 +1,4 @@
 import type populationNatureSample from './samples/population-nature-sample.json'
 
-export type PopulationNatureResponse = typeof populationNatureSample
-export type PopulationNature = typeof populationNatureSample['result']
+export type PopulationDataResponse = typeof populationNatureSample
+export type PopulationData = typeof populationNatureSample['result']
