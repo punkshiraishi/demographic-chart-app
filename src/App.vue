@@ -22,11 +22,18 @@ const fechedPopulationNatures = ref<{
   data: PopulationNature
 }[]>([])
 
-async function onCheck(prefecture: Prefecture) {
+async function mutatePopulationNatureStore(prefecture: Prefecture) {
+  if (fechedPopulationNatures.value.find(population => population.prefecture.prefCode === prefecture.prefCode))
+    return
+
   fechedPopulationNatures.value.push({
     prefecture,
     data: await getPoplationNature(prefecture.prefCode),
   })
+}
+
+async function onCheck(prefecture: Prefecture) {
+  await mutatePopulationNatureStore(prefecture)
 }
 
 const years = range(1985, 2021, 5)
@@ -53,6 +60,4 @@ const datasets = computed(() => fechedPopulationNatures.value
     :labels="years"
     :datasets="datasets"
   />
-  {{ selectedPrefectureCode }}
-  {{ datasets }}
 </template>
