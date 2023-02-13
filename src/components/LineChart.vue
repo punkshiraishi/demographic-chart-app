@@ -21,6 +21,14 @@ const props = defineProps({
     type: Array as PropType<{ name: string; data: number[] }[]>,
     required: true,
   },
+
+  /**
+   * ローディング
+   */
+  loading: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, Colors)
@@ -55,7 +63,14 @@ const chartData = computed(() => {
 
 <template>
   <Line
+    class="absolute"
     :data="chartData"
     :options="chartOptions"
   />
+  <div
+    v-if="loading"
+    class="relative h-full bg-slate-300 bg-opacity-50 grid place-content-center"
+  >
+    <div class="animate-spin h-10 w-10 border-4 border-blue-500 rounded-full border-t-transparent" />
+  </div>
 </template>
