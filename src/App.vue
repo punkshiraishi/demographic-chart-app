@@ -56,9 +56,16 @@ const datasets = computed(() => populationDataState.value
     <div class="p-5 min-h-0 flex-grow flex flex-col md:flex-row justify-center items-center gap-3">
       <div class="w-full h-[300px] md:w-1/2 md:h-[500px]">
         <LineChart
+          v-if="datasets.length > 0"
           :labels="years"
           :datasets="datasets"
         />
+        <div
+          v-else
+          class="h-full grid place-content-center bg-slate-300 rounded text-slate-800"
+        >
+          都道府県を選択してください
+        </div>
       </div>
       <div
         class="
