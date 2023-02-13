@@ -59,6 +59,7 @@ const datasets = computed(() => populationDataState.value
           v-if="datasets.length > 0"
           :labels="years"
           :datasets="datasets"
+          :loading="loading"
         />
         <div
           v-else
