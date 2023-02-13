@@ -28,6 +28,7 @@ ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale
 const { labels, datasets } = toRefs(props)
 
 const chartOptions: ChartOptions<'line'> = {
+  maintainAspectRatio: false,
   plugins: {
     legend: {
 
