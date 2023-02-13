@@ -44,33 +44,38 @@ const datasets = computed(() => populationDataState.value
 </script>
 
 <template>
-  <div
-    class="
-      p-5 h-screen md:h-auto
-      flex flex-col md:flex-row justify-center items-center gap-3
-    "
-  >
-    <div class="w-full h-[300px] md:w-1/2 md:h-[500px]">
-      <LineChart
-        :labels="years"
-        :datasets="datasets"
-      />
-    </div>
-    <div
+  <div class="h-screen md:h-auto flex flex-col">
+    <h1
       class="
-        overflow-auto w-full
-        grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-2
+        px-5 py-2 bg-cyan-600 sticky top-0 z-50 shadow-md
+        text-white font-bold text-lx md:text-2xl
       "
     >
-      <ArrayCheckbox
-        v-for="prefecture in prefectures"
-        :key="prefecture.prefCode"
-        v-model="selectedPrefectureCode"
-        :item="prefecture.prefCode"
-        :label="prefecture.prefName"
-        :disabled="loading"
-        @check="onCheck(prefecture)"
-      />
+      都道府県人口推移グラフ
+    </h1>
+    <div class="p-5 min-h-0 flex-grow flex flex-col md:flex-row justify-center items-center gap-3">
+      <div class="w-full h-[300px] md:w-1/2 md:h-[500px]">
+        <LineChart
+          :labels="years"
+          :datasets="datasets"
+        />
+      </div>
+      <div
+        class="
+        flex-grow overflow-auto w-full md:w-1/2
+        grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-2
+      "
+      >
+        <ArrayCheckbox
+          v-for="prefecture in prefectures"
+          :key="prefecture.prefCode"
+          v-model="selectedPrefectureCode"
+          :item="prefecture.prefCode"
+          :label="prefecture.prefName"
+          :disabled="loading"
+          @check="onCheck(prefecture)"
+        />
+      </div>
     </div>
   </div>
 </template>
