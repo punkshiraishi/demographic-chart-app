@@ -23,6 +23,22 @@ const props = defineProps({
   },
 
   /**
+   * 横軸のラベル名
+   */
+  xLabel: {
+    type: String,
+    default: null,
+  },
+
+  /**
+   * 縦軸のラベル名
+   */
+  yLabel: {
+    type: String,
+    default: null,
+  },
+
+  /**
    * ローディング
    */
   loading: {
@@ -33,7 +49,7 @@ const props = defineProps({
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, Colors)
 
-const { labels, datasets } = toRefs(props)
+const { labels, datasets, xLabel, yLabel } = toRefs(props)
 
 const chartOptions: ChartOptions<'line'> = {
   maintainAspectRatio: false,
@@ -45,6 +61,20 @@ const chartOptions: ChartOptions<'line'> = {
     },
     colors: {
       forceOverride: true,
+    },
+  },
+  scales: {
+    x: {
+      title: {
+        display: !!xLabel.value,
+        text: xLabel.value,
+      },
+    },
+    y: {
+      title: {
+        display: !!yLabel.value,
+        text: yLabel.value,
+      },
     },
   },
 }

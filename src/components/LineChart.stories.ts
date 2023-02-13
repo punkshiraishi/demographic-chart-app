@@ -65,3 +65,25 @@ export const loading = () => defineComponent({
     </div>
   `,
 })
+
+export const labeled = () => defineComponent({
+  components: {
+    LineChart,
+  },
+  setup() {
+    return {
+      datasets,
+      labels,
+    }
+  },
+  template: `
+    <div class="h-[500px] w-[600px]">
+      <LineChart
+        :labels="labels"
+        :datasets="datasets"
+        :x-label="'年'"
+        :y-label="'人口'"
+      />
+    </div>
+  `,
+})
