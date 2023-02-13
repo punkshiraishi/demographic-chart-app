@@ -69,9 +69,9 @@ const datasets = computed(() => populationDataState.value
       </div>
       <div
         class="
-        flex-grow overflow-auto w-full md:w-1/2
-        grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-2
-      "
+          flex-grow overflow-auto w-full md:w-1/2
+          grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-2
+        "
       >
         <ArrayCheckbox
           v-for="prefecture in prefectures"
