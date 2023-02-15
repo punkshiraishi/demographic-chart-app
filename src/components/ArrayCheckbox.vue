@@ -77,7 +77,7 @@ function onInput(event: Event) {
       focus-within:outline-2 focus-within:outline-offset-2
     "
     :class="[
-      disabled ? 'cursor-default' : 'cursor-pointer',
+      disabled ? 'cursor-default' : 'cursor-pointer hover:bg-slate-100',
       checked && 'bg-slate-300',
     ]"
     :style="{ background: checked && !disabled ? color : '' }"
