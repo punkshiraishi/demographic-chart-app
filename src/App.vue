@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
 import { range } from 'lodash'
-import ArrayCheckbox from './components/ArrayCheckbox.vue'
+import ColorArrayCheckbox from './components/ColorArrayCheckbox.vue'
 import LineChart from './components/LineChart.vue'
 import { useApi } from './hooks/useApi'
 import type { Prefecture } from './types/prefecture'
@@ -89,7 +89,7 @@ const colorsets = computed(() => {
           grid grid-cols-3 md:grid-cols-4 gap-2
         "
       >
-        <ArrayCheckbox
+        <ColorArrayCheckbox
           v-for="(prefecture, index) in prefectures"
           :key="prefecture.prefCode"
           v-model="selectedPrefectureCode"
