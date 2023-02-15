@@ -66,7 +66,7 @@ const colorsets = computed(() => {
       都道府県別人口推移グラフ
     </h1>
     <div class="p-5 min-h-0 flex-grow flex flex-col md:flex-row justify-center items-center gap-3">
-      <div class="w-full h-[300px] md:w-1/2 md:h-[500px]">
+      <div class="w-full h-[500px] md:w-1/2 md:h-[500px]">
         <LineChart
           v-if="datasets.length > 0"
           :labels="years"
