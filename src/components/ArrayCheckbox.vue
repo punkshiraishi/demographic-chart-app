@@ -28,6 +28,14 @@ const props = defineProps({
   },
 
   /**
+   * 背景色
+   */
+  color: {
+    type: String,
+    default: 'rgb(0, 0, 0, 0)',
+  },
+
+  /**
    * 非活性化どうか
    */
   disabled: {
@@ -62,9 +70,17 @@ function onInput(event: Event) {
 </script>
 
 <template>
-  <label>
+  <label
+    class="p-2 text-center"
+    :class="[
+      disabled ? 'cursor-default' : 'cursor-pointer',
+      checked && 'bg-slate-300',
+    ]"
+    :style="{ background: checked && !disabled ? color : '' }"
+  >
     <input
       v-model="checked"
+      class="hidden"
       type="checkbox"
       :disabled="disabled"
       @input="onInput"
