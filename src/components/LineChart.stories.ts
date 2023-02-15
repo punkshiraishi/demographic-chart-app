@@ -1,5 +1,6 @@
 /* eslint-disable vue/one-component-per-file */
 import { computed, defineComponent, ref } from 'vue'
+import isChromatic from 'chromatic'
 
 import LineChart from './LineChart.vue'
 
@@ -41,6 +42,9 @@ export const basic = () => defineComponent({
   },
   setup() {
     return {
+
+      // chromatic でアニメーションさせないことで余計なスナップショット差分を生むのを防ぐ
+      animation: !isChromatic(),
       datasets,
       labels,
       colorsets,
@@ -52,6 +56,7 @@ export const basic = () => defineComponent({
         :labels="labels"
         :datasets="datasets"
         :colorsets="colorsets"
+        :animation="animation"
       />
     </div>
   `,

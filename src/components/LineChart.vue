@@ -53,14 +53,23 @@ const props = defineProps({
     type: Object as PropType<{ [name: string]: string }>,
     default: () => {},
   },
+
+  /**
+   * アニメーションするかどうか
+   */
+  animation: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 
-const { labels, datasets, xLabel, yLabel, colorsets } = toRefs(props)
+const { labels, datasets, xLabel, yLabel, colorsets, animation } = toRefs(props)
 
 const chartOptions: ChartOptions<'line'> = {
   maintainAspectRatio: false,
+  animation: animation.value ? undefined : false,
   plugins: {
     legend: {
       display: false,
