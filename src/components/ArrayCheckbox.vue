@@ -71,7 +71,11 @@ function onInput(event: Event) {
 
 <template>
   <label
-    class="p-2 text-center"
+    class="
+      p-2 text-center
+      focus-within:outline-dotted focus-within:outline-slate-500
+      focus-within:outline-2 focus-within:outline-offset-2
+    "
     :class="[
       disabled ? 'cursor-default' : 'cursor-pointer',
       checked && 'bg-slate-300',
@@ -80,7 +84,7 @@ function onInput(event: Event) {
   >
     <input
       v-model="checked"
-      class="hidden"
+      class="opacity-0 w-0"
       type="checkbox"
       :disabled="disabled"
       @input="onInput"
