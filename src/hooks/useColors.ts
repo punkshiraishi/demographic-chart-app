@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import { computed } from 'vue'
 
-const COLORS = ['#206AF4', '#F33E3E', '#FFD600', '#64D951', '#6BD0D7', '#F99C12']
+const COLORS = ['#206AF4', '#F33E3E', '#FFD600', '#64D951', '#6BD0D7', '#F99C12', '#C04FF5']
 
 // 個数に応じてリアクティブに色の配列を返す hooks
 // 指定の色をループしながら徐々に薄くなる
