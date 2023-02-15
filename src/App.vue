@@ -67,7 +67,7 @@ const colorsets = computed(() => {
     </h1>
     <div
       v-if="prefectures.length > 0"
-      class="p-5 min-h-0 flex-grow flex flex-col md:flex-row justify-center items-center gap-3"
+      class="p-2 md:p-5 min-h-0 flex-grow flex flex-col md:flex-row justify-center items-center gap-3"
     >
       <div class="w-full h-[500px] md:w-1/2 md:h-[500px]">
         <LineChart
