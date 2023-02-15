@@ -72,7 +72,7 @@ function onInput(event: Event) {
 <template>
   <label
     class="
-      p-2 text-center
+      p-2 text-center transition
       focus-within:outline-dotted focus-within:outline-slate-500
       focus-within:outline-2 focus-within:outline-offset-2
     "
