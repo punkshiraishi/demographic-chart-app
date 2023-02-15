@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { type PropType, computed, toRefs } from 'vue'
 import { Line } from 'vue-chartjs'
-import { type ChartOptions, Colors } from 'chart.js'
+import type { ChartOptions } from 'chart.js'
 import { CategoryScale, Chart as ChartJS, Legend, LineElement, LinearScale, PointElement, Title, Tooltip } from 'chart.js'
 
 const props = defineProps({
@@ -45,19 +45,25 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+
+  /**
+   * グラフの配色。データセットの系列名をキー、値を色とするオブジェクトを渡す。
+   */
+  colorsets: {
+    type: Object as PropType<{ [name: string]: string }>,
+    default: () => {},
+  },
 })
 
-ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, Colors)
+ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 
-const { labels, datasets, xLabel, yLabel } = toRefs(props)
+const { labels, datasets, xLabel, yLabel, colorsets } = toRefs(props)
 
 const chartOptions: ChartOptions<'line'> = {
   maintainAspectRatio: false,
   plugins: {
     legend: {
-
-      // 凡例を click したときにその系列が消える挙動を無効にする
-      onClick: () => {},
+      display: false,
     },
     colors: {
       forceOverride: true,
@@ -83,8 +89,12 @@ const chartData = computed(() => {
   return {
     labels: labels.value,
     datasets: datasets.value.map(dataset => ({
+      borderColor: colorsets.value[dataset.name],
+      backgroundColor: colorsets.value[dataset.name],
       label: dataset.name,
       data: dataset.data,
+      fill: false,
+      lineTension: 0,
     }),
     ),
   }
