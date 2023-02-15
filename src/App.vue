@@ -99,6 +99,12 @@ const colorsets = computed(() => {
           :color="colors[index]"
           @check="onCheck(prefecture)"
         />
+        <button
+          class="bg-slate-800 text-slate-100"
+          @click="selectedPrefectureCode = []"
+        >
+          リセット
+        </button>
       </div>
     </div>
   </div>
