@@ -86,7 +86,7 @@ const colorsets = computed(() => {
       <div
         class="
           flex-grow overflow-auto p-1 w-full md:w-1/2
-          grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-2
+          grid grid-cols-3 md:grid-cols-4 gap-2
         "
       >
         <ArrayCheckbox
