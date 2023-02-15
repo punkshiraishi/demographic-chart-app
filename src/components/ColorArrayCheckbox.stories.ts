@@ -1,3 +1,4 @@
+/* eslint-disable vue/one-component-per-file */
 import { defineComponent, ref } from 'vue'
 
 import ColorArrayCheckbox from './ColorArrayCheckbox.vue'
@@ -13,12 +14,54 @@ export const basic = () => defineComponent({
   },
   setup() {
     return {
-      array: ref([]),
+      array: ref([1]),
     }
   },
   template: `
-    <ColorArrayCheckbox v-model="array" :item="1" label="北海道" />
-    <ColorArrayCheckbox v-model="array" :item="2" label="沖縄" />
+    <div class="grid grid-flow-col gap-2 w-[300px]">
+      <ColorArrayCheckbox
+        v-model="array"
+        :item="1"
+        label="北海道"
+        color="#FFD600"
+      />
+      <ColorArrayCheckbox
+        v-model="array"
+        :item="2"
+        label="沖縄"
+        color="#6BD0D7"
+      />
+    </div>
+    <div class="my-2">{{ array }}</div>
+  `,
+})
+
+export const disabled = () => defineComponent({
+  components: {
+    ColorArrayCheckbox,
+  },
+  setup() {
+    return {
+      array: ref([1]),
+    }
+  },
+  template: `
+    <div class="grid grid-flow-col gap-2 w-[300px]">
+      <ColorArrayCheckbox
+        v-model="array"
+        :item="1"
+        :disabled="true"
+        label="北海道"
+        color="#FFD600"
+      />
+      <ColorArrayCheckbox
+        v-model="array"
+        :item="2"
+        :disabled="true"
+        label="沖縄"
+        color="#6BD0D7"
+      />
+    </div>
     <div class="my-2">{{ array }}</div>
   `,
 })
