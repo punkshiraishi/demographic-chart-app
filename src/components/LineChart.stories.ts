@@ -1,5 +1,5 @@
 /* eslint-disable vue/one-component-per-file */
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 import LineChart from './LineChart.vue'
 
@@ -25,6 +25,16 @@ const datasets = ref([
 
 const labels = ref([2000, 2005, 2010])
 
+const colors = ['#206AF4', '#F33E3E', '#FFD600']
+
+const colorsets = computed(() => {
+  const value: { [prefName: string]: string } = {}
+  datasets.value.forEach((datasets, index) => {
+    value[datasets.name] = colors[index]
+  })
+  return value
+})
+
 export const basic = () => defineComponent({
   components: {
     LineChart,
@@ -33,6 +43,7 @@ export const basic = () => defineComponent({
     return {
       datasets,
       labels,
+      colorsets,
     }
   },
   template: `
@@ -40,6 +51,7 @@ export const basic = () => defineComponent({
       <LineChart
         :labels="labels"
         :datasets="datasets"
+        :colorsets="colorsets"
       />
     </div>
   `,
@@ -53,6 +65,7 @@ export const loading = () => defineComponent({
     return {
       datasets,
       labels,
+      colorsets,
     }
   },
   template: `
@@ -60,6 +73,7 @@ export const loading = () => defineComponent({
       <LineChart
         :labels="labels"
         :datasets="datasets"
+        :colorsets="colorsets"
         :loading="true"
       />
     </div>
@@ -74,6 +88,7 @@ export const labeled = () => defineComponent({
     return {
       datasets,
       labels,
+      colorsets,
     }
   },
   template: `
@@ -81,6 +96,7 @@ export const labeled = () => defineComponent({
       <LineChart
         :labels="labels"
         :datasets="datasets"
+        :colorsets="colorsets"
         :x-label="'年'"
         :y-label="'人口'"
       />
