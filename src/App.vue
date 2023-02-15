@@ -6,6 +6,7 @@ import LineChart from './components/LineChart.vue'
 import { useApi } from './hooks/useApi'
 import type { Prefecture } from './types/prefecture'
 import { usePopulationDataStore } from './hooks/usePopulationDataStore'
+import { useColors } from './hooks/useColors'
 
 const { getPrefectures, getPopulation } = useApi()
 const loading = ref(false)
@@ -41,6 +42,17 @@ const datasets = computed(() => populationDataState.value
     name: population.prefecture.prefName,
     data: population.data.map(item => item.value),
   })))
+
+const { colors } = useColors(computed(() => prefectures.value.length))
+
+// 都道府県と対応する色をマッピングする
+const colorsets = computed(() => {
+  const value: { [prefName: string]: string } = {}
+  prefectures.value.forEach((prefecture, index) => {
+    value[prefecture.prefName] = colors.value[index]
+  })
+  return value
+})
 </script>
 
 <template>
@@ -61,6 +73,7 @@ const datasets = computed(() => populationDataState.value
           :datasets="datasets"
           x-label="年"
           y-label="人口"
+          :colorsets="colorsets"
           :loading="loading"
         />
         <div
@@ -77,12 +90,13 @@ const datasets = computed(() => populationDataState.value
         "
       >
         <ArrayCheckbox
-          v-for="prefecture in prefectures"
+          v-for="(prefecture, index) in prefectures"
           :key="prefecture.prefCode"
           v-model="selectedPrefectureCode"
           :item="prefecture.prefCode"
           :label="prefecture.prefName"
           :disabled="loading"
+          :color="colors[index]"
           @check="onCheck(prefecture)"
         />
       </div>
