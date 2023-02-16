@@ -1,6 +1,6 @@
 /* eslint-disable vue/one-component-per-file */
 import { defineComponent, ref } from 'vue'
-
+import { screen, userEvent } from '@storybook/testing-library'
 import ColorArrayCheckbox from './ColorArrayCheckbox.vue'
 
 export default {
@@ -65,3 +65,9 @@ export const disabled = () => defineComponent({
     <div class="my-2">{{ array }}</div>
   `,
 })
+
+basic.play = async () => {
+  // クリックする
+  await userEvent.click(await screen.findByText('沖縄'))
+  await userEvent.click(await screen.findByText('北海道'))
+}
