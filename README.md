@@ -35,11 +35,3 @@ npm run storybook
 ```sh
 npm run lint
 ```
-
-## Test
-
-```sh
-npm run test-storybook
-```
-
-テストのカバレッジを見ることができます。
