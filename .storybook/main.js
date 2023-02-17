@@ -1,5 +1,3 @@
-const istanbul = require('vite-plugin-istanbul');
-
 module.exports = {
   "stories": [
     "../src/**/*.stories.ts"
@@ -7,16 +5,7 @@ module.exports = {
   "addons": [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "@storybook/addon-coverage",
-    {
-      name: "@storybook/addon-coverage",
-      options: {
-        istanbul: {
-          include: ["**/components/**"],
-        },
-      },
-    },
+    "@storybook/addon-interactions"
   ],
   "framework": "@storybook/vue3",
   "core": {
@@ -24,13 +13,5 @@ module.exports = {
   },
   "features": {
     "storyStoreV7": true
-  },
-  async viteFinal(config) {
-    config.plugins.push(istanbul({
-      "extension": [
-        ".vue"
-      ]
-    }));
-    return config;
-  },
+  }
 }
