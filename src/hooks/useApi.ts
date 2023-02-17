@@ -3,14 +3,17 @@ import type { PrefecturesResponse } from '@/types/prefecture'
 
 export function useApi() {
   async function getPrefectures() {
-    return (await (await fetch('/api/prefectures')).json() as PrefecturesResponse).result
+    return ((await (await fetch('/api/prefectures')).json()) as PrefecturesResponse).result
   }
 
   async function getPopulation(prefCode: number) {
-    return (await (await fetch(
-      `/api/population/composition/perYear?cityCode=-&prefCode=${prefCode}`,
-    )).json() as PopulationDataResponse)
-      .result.data.find(item => item.label === '総人口')?.data ?? []
+    return (
+      (
+        (await (
+          await fetch(`/api/population/composition/perYear?cityCode=-&prefCode=${prefCode}`)
+        ).json()) as PopulationDataResponse
+      ).result.data.find((item) => item.label === '総人口')?.data ?? []
+    )
   }
 
   return {

@@ -2,10 +2,18 @@
 import { type PropType, computed, toRefs } from 'vue'
 import { Line } from 'vue-chartjs'
 import type { ChartOptions } from 'chart.js'
-import { CategoryScale, Chart as ChartJS, Legend, LineElement, LinearScale, PointElement, Title, Tooltip } from 'chart.js'
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
+} from 'chart.js'
 
 const props = defineProps({
-
   /**
    * 横軸のデータ
    */
@@ -97,29 +105,21 @@ const chartOptions: ChartOptions<'line'> = {
 const chartData = computed(() => {
   return {
     labels: labels.value,
-    datasets: datasets.value.map(dataset => ({
+    datasets: datasets.value.map((dataset) => ({
       borderColor: colorsets.value[dataset.name],
       backgroundColor: colorsets.value[dataset.name],
       label: dataset.name,
       data: dataset.data,
       fill: false,
       lineTension: 0,
-    }),
-    ),
+    })),
   }
 })
 </script>
 
 <template>
-  <Line
-    class="absolute"
-    :data="chartData"
-    :options="chartOptions"
-  />
-  <div
-    v-if="loading"
-    class="relative h-full bg-slate-300 bg-opacity-50 grid place-content-center"
-  >
+  <Line class="absolute" :data="chartData" :options="chartOptions" />
+  <div v-if="loading" class="relative h-full bg-slate-300 bg-opacity-50 grid place-content-center">
     <div class="animate-spin h-10 w-10 border-4 border-blue-500 rounded-full border-t-transparent" />
   </div>
 </template>

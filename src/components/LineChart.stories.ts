@@ -36,21 +36,21 @@ const colorsets = computed(() => {
   return value
 })
 
-export const basic = () => defineComponent({
-  components: {
-    LineChart,
-  },
-  setup() {
-    return {
-
-      // chromatic でアニメーションさせないことで余計なスナップショット差分を生むのを防ぐ
-      animation: !isChromatic(),
-      datasets,
-      labels,
-      colorsets,
-    }
-  },
-  template: `
+export const basic = () =>
+  defineComponent({
+    components: {
+      LineChart,
+    },
+    setup() {
+      return {
+        // chromatic でアニメーションさせないことで余計なスナップショット差分を生むのを防ぐ
+        animation: !isChromatic(),
+        datasets,
+        labels,
+        colorsets,
+      }
+    },
+    template: `
     <div class="h-[500px] w-[600px]">
       <LineChart
         :labels="labels"
@@ -60,20 +60,21 @@ export const basic = () => defineComponent({
       />
     </div>
   `,
-})
+  })
 
-export const loading = () => defineComponent({
-  components: {
-    LineChart,
-  },
-  setup() {
-    return {
-      datasets,
-      labels,
-      colorsets,
-    }
-  },
-  template: `
+export const loading = () =>
+  defineComponent({
+    components: {
+      LineChart,
+    },
+    setup() {
+      return {
+        datasets,
+        labels,
+        colorsets,
+      }
+    },
+    template: `
     <div class="h-[500px] w-[600px]">
       <LineChart
         :labels="labels"
@@ -83,20 +84,21 @@ export const loading = () => defineComponent({
       />
     </div>
   `,
-})
+  })
 
-export const labeled = () => defineComponent({
-  components: {
-    LineChart,
-  },
-  setup() {
-    return {
-      datasets,
-      labels,
-      colorsets,
-    }
-  },
-  template: `
+export const labeled = () =>
+  defineComponent({
+    components: {
+      LineChart,
+    },
+    setup() {
+      return {
+        datasets,
+        labels,
+        colorsets,
+      }
+    },
+    template: `
     <div class="h-[500px] w-[600px]">
       <LineChart
         :labels="labels"
@@ -107,4 +109,4 @@ export const labeled = () => defineComponent({
       />
     </div>
   `,
-})
+  })
