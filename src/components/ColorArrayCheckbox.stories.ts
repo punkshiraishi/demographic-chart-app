@@ -8,17 +8,16 @@ export default {
   component: ColorArrayCheckbox,
 }
 
-export const basic = () =>
-  defineComponent({
-    components: {
-      ColorArrayCheckbox,
-    },
-    setup() {
-      return {
-        array: ref([1]),
-      }
-    },
-    template: `
+export const basic = () => defineComponent({
+  components: {
+    ColorArrayCheckbox,
+  },
+  setup() {
+    return {
+      array: ref([1]),
+    }
+  },
+  template: `
     <div class="grid grid-flow-col gap-2 w-[300px]">
       <ColorArrayCheckbox
         v-model="array"
@@ -35,19 +34,18 @@ export const basic = () =>
     </div>
     <div class="my-2">{{ array }}</div>
   `,
-  })
+})
 
-export const disabled = () =>
-  defineComponent({
-    components: {
-      ColorArrayCheckbox,
-    },
-    setup() {
-      return {
-        array: ref([1]),
-      }
-    },
-    template: `
+export const disabled = () => defineComponent({
+  components: {
+    ColorArrayCheckbox,
+  },
+  setup() {
+    return {
+      array: ref([1]),
+    }
+  },
+  template: `
     <div class="grid grid-flow-col gap-2 w-[300px]">
       <ColorArrayCheckbox
         v-model="array"
@@ -66,7 +64,7 @@ export const disabled = () =>
     </div>
     <div class="my-2">{{ array }}</div>
   `,
-  })
+})
 
 basic.play = async () => {
   // クリックする

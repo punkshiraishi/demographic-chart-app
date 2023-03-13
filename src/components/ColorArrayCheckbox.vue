@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 
 const props = defineProps({
+
   /**
    * 値を追加する配列
    */
@@ -50,28 +51,44 @@ const checked = computed({
     return props.modelValue.includes(props.item)
   },
   set(state: boolean) {
-    emit(
-      'update:modelValue',
-      state ? [...props.modelValue, props.item] : props.modelValue.filter((item) => item !== props.item)
-    )
+    emit('update:modelValue', state
+      ? [...props.modelValue, props.item]
+      : props.modelValue.filter(item => item !== props.item))
   },
 })
 
 function onInput(event: Event) {
-  if (!(event.target instanceof HTMLInputElement)) return
+  if (!(event.target instanceof HTMLInputElement))
+    return
 
-  if (event.target.checked) emit('check')
-  else emit('uncheck')
+  if (event.target.checked)
+    emit('check')
+
+  else
+    emit('uncheck')
 }
 </script>
 
 <template>
   <label
-    class="p-2 text-center transition focus-within:outline-dotted focus-within:outline-slate-500 focus-within:outline-2 focus-within:outline-offset-2"
-    :class="[disabled ? 'cursor-default' : 'cursor-pointer hover:bg-slate-100', checked && 'bg-slate-300']"
+    class="
+      p-2 text-center transition
+      focus-within:outline-dotted focus-within:outline-slate-500
+      focus-within:outline-2 focus-within:outline-offset-2
+    "
+    :class="[
+      disabled ? 'cursor-default' : 'cursor-pointer hover:bg-slate-100',
+      checked && 'bg-slate-300',
+    ]"
     :style="{ background: checked && !disabled ? color : '' }"
   >
-    <input v-model="checked" class="opacity-0 w-0" type="checkbox" :disabled="disabled" @input="onInput" />
+    <input
+      v-model="checked"
+      class="opacity-0 w-0"
+      type="checkbox"
+      :disabled="disabled"
+      @input="onInput"
+    >
     <span>
       {{ label }}
     </span>

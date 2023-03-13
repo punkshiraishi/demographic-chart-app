@@ -7,7 +7,8 @@ const COLORS = ['#206AF4', '#F33E3E', '#FFD600', '#64D951', '#6BD0D7', '#F99C12'
 // 指定の色をループしながら徐々に薄くなる
 export function useColors(size: Ref<number>) {
   const colors = computed(() => {
-    if (!size.value) return []
+    if (!size.value)
+      return []
 
     const value = getColors(size.value)
 
@@ -27,9 +28,9 @@ function hexToRGBA(hex: string, alpha: number) {
 
   // RGBA to RGB
   // 背景色が白 = rgb(255, 255, 255) という前提で透過度で重みづけして RGB に変換している。
-  const r2 = Math.round((1 - alpha) * 255 + alpha * r)
-  const g2 = Math.round((1 - alpha) * 255 + alpha * g)
-  const b2 = Math.round((1 - alpha) * 255 + alpha * b)
+  const r2 = Math.round(((1 - alpha) * 255) + (alpha * r))
+  const g2 = Math.round(((1 - alpha) * 255) + (alpha * g))
+  const b2 = Math.round(((1 - alpha) * 255) + (alpha * b))
 
   return `rgb(${r2},${g2},${b2})`
 }

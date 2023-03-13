@@ -22,7 +22,9 @@ async function onCheck(prefecture: Prefecture) {
   try {
     loading.value = true
     await updatePopulationDataState(prefecture)
-  } finally {
+  }
+
+  finally {
     loading.value = false
   }
 }
@@ -30,18 +32,16 @@ async function onCheck(prefecture: Prefecture) {
 // TODO: API から取得した値で動的にラベルを表示できるとより良い
 const years = range(1960, 2046, 5)
 
-const datasets = computed(() =>
-  populationDataState.value
+const datasets = computed(() => populationDataState.value
 
-    // 表示するデータセットは選択中の都道府県に限定する
-    .filter((population) => selectedPrefectureCode.value.includes(population.prefecture.prefCode))
+  // 表示するデータセットは選択中の都道府県に限定する
+  .filter(population => selectedPrefectureCode.value.includes(population.prefecture.prefCode))
 
-    // API から受け取ったデータ型を LineChart が要求する型に変換する
-    .map((population) => ({
-      name: population.prefecture.prefName,
-      data: population.data.map((item) => item.value),
-    }))
-)
+  // API から受け取ったデータ型を LineChart が要求する型に変換する
+  .map(population => ({
+    name: population.prefecture.prefName,
+    data: population.data.map(item => item.value),
+  })))
 
 const { colors } = useColors(computed(() => prefectures.value.length))
 
@@ -57,7 +57,12 @@ const colorsets = computed(() => {
 
 <template>
   <div class="h-screen md:h-auto flex flex-col">
-    <h1 class="px-5 py-2 bg-cyan-600 sticky top-0 z-50 shadow-md text-white font-bold text-lx md:text-2xl">
+    <h1
+      class="
+        px-5 py-2 bg-cyan-600 sticky top-0 z-50 shadow-md
+        text-white font-bold text-lx md:text-2xl
+      "
+    >
       都道府県別人口推移グラフ
     </h1>
     <div
@@ -74,11 +79,19 @@ const colorsets = computed(() => {
           :colorsets="colorsets"
           :loading="loading"
         />
-        <div v-else class="h-full grid place-content-center bg-slate-300 rounded text-slate-800">
+        <div
+          v-else
+          class="h-full grid place-content-center bg-slate-300 rounded text-slate-800"
+        >
           都道府県を選択してください
         </div>
       </div>
-      <div class="flex-grow overflow-auto p-1 w-full md:w-1/2 grid grid-cols-3 md:grid-cols-4 gap-2">
+      <div
+        class="
+          flex-grow overflow-auto p-1 w-full md:w-1/2
+          grid grid-cols-3 md:grid-cols-4 gap-2
+        "
+      >
         <ColorArrayCheckbox
           v-for="(prefecture, index) in prefectures"
           :key="prefecture.prefCode"
@@ -89,7 +102,12 @@ const colorsets = computed(() => {
           :color="colors[index]"
           @check="onCheck(prefecture)"
         />
-        <button class="bg-slate-800 text-slate-100" @click="selectedPrefectureCode = []">リセット</button>
+        <button
+          class="bg-slate-800 text-slate-100"
+          @click="selectedPrefectureCode = []"
+        >
+          リセット
+        </button>
       </div>
     </div>
   </div>
